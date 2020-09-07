@@ -31,17 +31,17 @@ Dim WS As Worksheet
 ' Loop through all ticker symbol
         
     For i = 2 To LastRow
-' Check if we are still within the same ticker symbol, if it is not...
+' Check for the same ticker symbol
     If Cells(i + 1, Column).Value <> Cells(i, Column).Value Then
 ' Set Ticker name
     Ticker_Name = Cells(i, Column).Value
     Cells(Row, Column + 8).Value = Ticker_Name
 ' Set Close Price
     Close_Price = Cells(i, Column + 5).Value
-' Add Yearly Change
+' Set Yearly Change
     Yearly_Change = Close_Price - Open_Price
     Cells(Row, Column + 9).Value = Yearly_Change
-' Add Percent Change
+' Set Percent Change
     If (Open_Price = 0 And Close_Price = 0) Then
         Percent_Change = 0
     ElseIf (Open_Price = 0 And Close_Price <> 0) Then
@@ -51,7 +51,7 @@ Dim WS As Worksheet
         Cells(Row, Column + 10).Value = Percent_Change
         Cells(Row, Column + 10).NumberFormat = "0.00%"
     End If
-' Add Total Volumn
+' Add Total Volume
     Volume = Volume + Cells(i, Column + 6).Value
     Cells(Row, Column + 11).Value = Volume
 ' Add one to the summary table row
